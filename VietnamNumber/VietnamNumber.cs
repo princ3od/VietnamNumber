@@ -82,6 +82,7 @@ namespace VietnamNumber
             };
         }
 
+        // "10" -> "mười"
         public static string ToVietnameseWords(this long n)
         {
             if (n == 0L) return "không";
@@ -110,6 +111,8 @@ namespace VietnamNumber
                 .Replace(rawResult, "\\s+", " ")
                 .Trim();
         }
+
+        // "09" -> "không chín"
         public static string ToVietnameseSingleWords(this string n)
         {
             var raw = "";
