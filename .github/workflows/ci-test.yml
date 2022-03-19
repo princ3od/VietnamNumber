@@ -1,0 +1,26 @@
+name: Run Unit Test
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build package
+      run: dotnet build VietnamNumber.sln --configuration Release --no-restore
+      
+    - name: Run unit test
+      run: dotnet test VietnamNumber.sln --configuration release --no-build --verbosity normal
