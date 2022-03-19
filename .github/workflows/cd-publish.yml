@@ -1,0 +1,42 @@
+name: Publish Package
+
+on:
+  push:
+    tags:
+      - "*"
+
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        
+    - name: Restore dependencies
+      run: dotnet restore
+      
+    - name: Build package
+      run: dotnet build VietnamNumber.csproj --configuration Release --no-restore
+      working-directory: ./VietnamNumber
+      
+    - name: Get tag
+      id: tag
+      uses: dawidd6/action-get-tag@v1
+      with:
+        strip_v: true
+        
+    - name: Pack package
+      run: dotnet pack VietnamNumber.csproj --configuration release -o:package /p:PackageVersion=${{ steps.tag.outputs.tag }}
+      working-directory: ./VietnamNumber
+    
+    - name: Publish generated package to Nuget registry
+      run: dotnet nuget push **/*.nupkg  --source "https://api.nuget.org/v3/index.json" --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
+      
+    - name: Publish generated package to GitHub registry
+      run: dotnet nuget push **/*.nupkg  --source "https://nuget.pkg.github.com/princ3od/index.json" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
