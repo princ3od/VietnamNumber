@@ -4,6 +4,9 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <Company>UIT</Company>
+    <Authors>Trong</Authors>
+    <RepositoryUrl>https://github.com/princ3od/VietnamNumber</RepositoryUrl>
   </PropertyGroup>
 
 </Project>
