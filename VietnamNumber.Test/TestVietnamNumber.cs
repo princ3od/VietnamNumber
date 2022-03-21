@@ -7,6 +7,7 @@ namespace VietnamNumber.Test
         [SetUp]
         public void Setup()
         {
+
         }
 
         [TestCase(-55, "âm năm mươi lăm")]
