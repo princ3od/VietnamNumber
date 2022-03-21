@@ -7,10 +7,9 @@ namespace VietnamNumber.Test
         [SetUp]
         public void Setup()
         {
-
         }
 
-        [TestCase(-55, "âm năm mươi lăm")]
+        [TestCase(-55, "âm năm mươi lă")]
         [TestCase(-1055, "âm một nghìn không trăm năm mươi lăm")]
         [TestCase(101002101000000000, "một trăm lẻ một triệu tỷ không trăm lẻ hai nghìn tỷ một trăm lẻ một tỷ")]
         [TestCase(100000000000, "một trăm tỷ")]
